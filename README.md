@@ -134,7 +134,16 @@ Also decided to use a `mutableList` for now as a datastore just to make things a
 #### 2.B
 I've always had a very iterative process for developing in Python. I need to figure out a way to make this more iterative... right now I'm using a mock `main.kt` to run experiments. This is also making me want to learn TDD, but that will have to be on another project.
 
-At the moment I have a working task class and a working DAO class with which I can add and remove elements from my datastore (a simple mutable list at the moment).
+At the moment I have a working task class and a working DAO class with which I can add and remove elements from my datastore (a simple mutable list for now).
 
 #### 2.C
 Doing some research on error handling in Kotlin.
+
+#### 2.D
+A small snag. Currently I'm using the index of the element in the data store as a proxy for its ID. But I'll have problems when I start deleting elements since their index will not match with their IDs anymore. I could take a few paths:
+* Permanently store all tasks and use an active/deleted flag. Will take more data space but can be helpful to have that data persistent.
+* When adding a new Task, query the data store for the last ID used. This will always be the last element in the list so this query will not cost too much in terms of processing. But it is an 'unnecessary' hit on the DB.
+
+I decided to go with the first path. This will require a new class attribute for my tasks and some change in the addTask method of the DAO.
+
+Also reverted to a hashMap for the data store to make look ups more efficient.
