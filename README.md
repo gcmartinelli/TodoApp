@@ -125,3 +125,16 @@ This is what I'm thinking right now:
 The smallest things can take some time to get used to... Like writing strings with "" and never ''
 
 Java does not accept named arguments in functions `whytho.png`
+
+#### 2.A
+Wasted a bit of time trying to figure out if I needed to import my classes or not. Main script seems to work without any explicit imports (I was expecting something like `import kotlin.TaskClass`)
+
+Also decided to use a `mutableList` for now as a datastore just to make things a bit more familiar for my Pythonic brain.
+
+#### 2.B
+I've always had a very iterative process for developing in Python. I need to figure out a way to make this more iterative... right now I'm using a mock `main.kt` to run experiments. This is also making me want to learn TDD, but that will have to be on another project.
+
+At the moment I have a working task class and a working DAO class with which I can add and remove elements from my datastore (a simple mutable list at the moment).
+
+#### 2.C
+Doing some research on error handling in Kotlin.
