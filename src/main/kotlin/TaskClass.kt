@@ -14,11 +14,13 @@
 
 import java.util.Date
 
-data class Task(val creationDate: Date = Date(),
-           var dueDate: Date,
-           val title: String,
-           val description: String = "",
-           var status: String) {
+data class Task(
+            val id: Int,
+            val creationDate: Date = Date(),
+            var dueDate: Date,
+            val title: String,
+            val description: String = "",
+            var status: String) {
 
     fun updateStatus() : Boolean {
         /* Returns a boolean representing
