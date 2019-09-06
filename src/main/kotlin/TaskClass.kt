@@ -20,7 +20,7 @@ data class Task(
             var dueDate: Date,
             val title: String,
             val description: String = "",
-            var status: String) {
+            var status: String = "todo") {
 
     fun updateStatus() : Boolean {
         /* Returns a boolean representing
