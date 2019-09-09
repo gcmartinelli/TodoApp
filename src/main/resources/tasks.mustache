@@ -1,0 +1,13 @@
+{{#tasks}}
+    <h3>{{title}}</h3>
+    <p>{{desc}}</p>
+    <p>Due for: {{dueDate}}</p>
+    <p>Created on: {{creationDate}}</p>
+    <p>Status: {{status}}</p>
+    <form method="POST" action="/tasks/delete/{{id}}/">
+        <button type="submit">Delete</button>
+    </form>
+    <form method="POST" action="/tasks/complete/{{id}}/">
+        <button type="submit">Complete</button>
+    </form>
+{{/tasks}}

@@ -13,6 +13,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     compile "io.javalin:javalin:3.4.1"
     compile "org.slf4j:slf4j-simple:1.7.26"
+    compile "com.github.spullara.mustache.java:compiler:0.9.6"
     compile "com.fasterxml.jackson.core:jackson-databind:2.10.0.pr1"
     compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.10.0.pr1"
 }
