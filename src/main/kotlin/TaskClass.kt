@@ -16,8 +16,8 @@ import java.util.Date
 
 data class Task(
             val id: Int,
-            val creationDate: Date = Date(),
-            var dueDate: Date,
+            val creationDate: Long = Date().getTime(),
+            var dueDate: Long,
             val title: String,
             val description: String = "",
             var status: String = "todo",

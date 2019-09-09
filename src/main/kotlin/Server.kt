@@ -15,25 +15,36 @@ fun main() {
     app.routes {
         /* where the magic happens */
         ApiBuilder.get("/tasks") { ctx ->
-            ctx.json(taskDAO.tasks)
+            val tasks = taskDAO.tasks.filter{ it.value.deleted == false } // Let's ignore deleted tasks ofc
+            ctx.json(tasks)
         }
 
         ApiBuilder.post("/tasks/add") { ctx ->
-            val task = ctx.body<Task>()
-            taskDAO.addTask(dueDate = task.dueDate,
-                            title = task.title,
-                            desc = task.description)
-            ctx.status(201)
+            val dueDate = ctx.formParam("dueDate")?.toLong() ?: throw IllegalArgumentException("[ERROR] DueDate cannot be Null")
+            val title = ctx.formParam("title") ?: throw IllegalArgumentException("[ERROR] Title cannot be Null")
+            val desc = ctx.formParam("desc")
+            try {
+                if (desc != null){
+                    taskDAO.addTask(dueDate = dueDate, title = title, desc = desc)
+                } else {
+                    taskDAO.addTask(dueDate, title)}
+                ctx.status(200)
+            } catch (e: IllegalArgumentException) {
+                ctx.status(500)
+            }
         }
 
         ApiBuilder.delete("/tasks/delete/:taskID") { ctx ->
-            taskDAO.delTask(ctx.pathParam("taskID").toInt())
-            ctx.status(204)
+            val taskID = ctx.pathParam("taskID").toInt()
+            taskDAO.delTask(taskID).also{ println("[DELETED] Task with ID $taskID set to deleted.")}
+
+            ctx.status(200)
         }
 
         ApiBuilder.patch("/tasks/complete/:taskID") { ctx ->
-            taskDAO.completeTask(ctx.pathParam("taskID").toInt())
-            ctx.status(204)
+            val taskID = ctx.pathParam("taskID").toInt()
+            taskDAO.completeTask(taskID).also{ println("[UPDATED] Task with ID $taskID status set to complete.")}
+            ctx.status(200)
         }
     }
 

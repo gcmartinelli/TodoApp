@@ -14,15 +14,15 @@ class TaskDAO(){
     // I'll initially work with data stored in memory.
     // For convenience I'll initialize some here
     var tasks = hashMapOf(
-        0 to Task(0, Date(), Date(2019-1900, 9, 21), title="A simple task", description="Things to do", status="todo"),
-        1 to Task(1, Date(), Date(2019-1900, 8, 9), title="Buy eggs", description="Can't make omeletes", status="todo"),
-        2 to Task(2, Date(), Date(2019-1900, 8, 5), title="Learn Kotlin", description="Cool jobs require it ;)", status="late"),
-        3 to Task(3, Date(), Date(2019-1900, 10, 21), title="Buy bitcoin", description="Buy the dip and HODL", status="todo"),
-        4 to Task(4, Date(), Date(2019-1900, 8, 8), title="Water plants", description="", status="todo"),
-        5 to Task(5, Date(), Date(2019-1900, 11, 20), title="Get Xmas gifts", description="Don't leave it to the last minute", status="todo")
+        0 to Task(0, dueDate = 1568049780979, title="A simple task", description="Things to do", status="todo"),
+        1 to Task(1, dueDate = 1568049780979, title="Buy eggs", description="Can't make omeletes", status="todo"),
+        2 to Task(2, dueDate = 1568058780979, title="Learn Kotlin", description="Cool jobs require it ;)", status="late"),
+        3 to Task(3, dueDate = 1568068780979, title="Buy bitcoin", description="Buy the dip and HODL", status="todo"),
+        4 to Task(4, dueDate = 1568078780979, title="Water plants", description="", status="todo"),
+        5 to Task(5, dueDate = 1568088780979, title="Get Xmas gifts", description="Don't leave it to the last minute", status="todo")
     )
 
-    fun addTask(dueDate : Date,
+    fun addTask(dueDate : Long,
                 title : String,
                 desc : String = "") {
         /* Adds a new task to the database if the due date is valid,
@@ -30,8 +30,9 @@ class TaskDAO(){
 
         // Check if dueDate is valid (i.e. not in the past).
         // This should be done client side, but it's good to practice error handling
+        val dueDateUnixTime = Date(dueDate) // converts unixtime long to a Date object
         val currDate = Date()
-        if (currDate.after(dueDate)) {
+        if (currDate.after(dueDateUnixTime)) {
             val message = "[ERROR] We can't go back in time :( This due date is already gone"
             println(message) // TODO: Implement logging
             throw IllegalArgumentException(message)
