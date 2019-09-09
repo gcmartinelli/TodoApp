@@ -13,9 +13,9 @@ This is my first contact with Kotlin (and Java) and my first time attempting any
 ## Captain's Log
 I decided to document my development of this small app and my first experiences with Kotlin as a Python developer.
 
-* (Date 1.0)[devdiary/d1.md]
-* (Date 2.0)[devdiary/d2.md]
-* (Date 3.0)[devdiary/d3.md]
+* [Date 1.0](devdiary/d1.md)
+* [Date 2.0](devdiary/d2.md)
+* [Date 3.0](devdiary/d3.md)
 
 
 
