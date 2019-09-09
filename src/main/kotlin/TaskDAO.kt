@@ -38,20 +38,23 @@ class TaskDAO(){
         } else {
             val nextID : Int = tasks.size
             val newTask = Task(id = nextID, dueDate = dueDate, title = title, description = desc)
-            tasks.put(nextID, newTask)
+            tasks[nextID] = newTask
         }
 
     }
 
     fun delTask(taskID : Int) {
         /* Given a task ID, flags a task as deleted */
-        val task = tasks.get(taskID) ?: throw IllegalArgumentException("[ERROR] Task with ID {$taskID} not found.")
+        val task = tasks[taskID] ?: throw IllegalArgumentException("[ERROR] delTask: Task with ID {$taskID} not found.")
         task.deleted = true
         tasks.replace(taskID, task)
     }
 
-    fun completeTask() {
-        TODO()
+    fun completeTask(taskID: Int) {
+        /* Given a task ID, flags a task as completed */
+        val task = tasks[taskID] ?: throw IllegalArgumentException("[ERROR] completeTask: Task with ID {$taskID} not found.")
+        task.status = "complete"
+        tasks.replace(taskID, task)
     }
 
 }
