@@ -8,6 +8,7 @@ fun main() {
     val taskDAO = TaskDAO()
 
     val app = Javalin.create().apply {
+        config.addStaticFiles("/materialize")
         exception(Exception::class.java) { e, ctx -> e.printStackTrace() }
         error(404) { ctx -> ctx.json("not found")}
     }.start(8000)
@@ -35,12 +36,13 @@ fun main() {
                     )
                 )
             }
+            tasksToRender.sortBy(RenderTaskClass::dueDate)
            ctx.render("tasks.mustache",  mapOf("tasks" to tasksToRender))
         }
 
         ApiBuilder.post("/tasks/add") { ctx ->
             // A lot of repetition in this block... need to refactor
-            val dueDate = ctx.formParam("dueDate")?.toLong() ?: throw IllegalArgumentException("[ERROR] DueDate cannot be Null")
+            val dueDate = ctx.formParam("dueDate") ?: throw IllegalArgumentException("[ERROR] DueDate cannot be Null")
             val title = ctx.formParam("title") ?: throw IllegalArgumentException("[ERROR] Title cannot be Null")
             val desc = ctx.formParam("desc")
             try {

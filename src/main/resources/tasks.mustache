@@ -1,13 +1,105 @@
-{{#tasks}}
-    <h3>{{title}}</h3>
-    <p>{{desc}}</p>
-    <p>Due for: {{dueDate}}</p>
-    <p>Created on: {{creationDate}}</p>
-    <p>Status: {{status}}</p>
-    <form method="POST" action="/tasks/delete/{{id}}/">
-        <button type="submit">Delete</button>
-    </form>
-    <form method="POST" action="/tasks/complete/{{id}}/">
-        <button type="submit">Complete</button>
-    </form>
-{{/tasks}}
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <!-- Crusty embedding of CSS but Mustache does not allow for logic in the template -->
+    <style type="text/css">
+        .late {
+            background-color: #982121;
+            color: white;
+        }
+
+        .complete {
+            background-color: #dadada;
+            color: rgba(189, 183, 183, 0.87);
+        }
+
+        .late .due {
+            color: red;
+        }
+    </style>
+</head>
+<div class="row">
+    <div class="center">
+        <h1>Amazing Kotlin ToDo List</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="center">
+        <!-- Modal Trigger -->
+        <button data-target="modal1" class="btn modal-trigger btn-large">Add New Task</button>
+
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal">
+            <form action="/tasks/add" method="POST">
+                <div class="modal-content">
+                      <h4>Add a new Task</h4>
+                            <div class="row">
+                                  <div class="input-field col s6">
+                                      <input placeholder="Title" id="title" name="title" type="text" class="validate">
+                                      <label for="title">Title</label>
+                                  </div>
+                                  <div class="input-field col s6">
+                                      <textarea id="desc" name="desc" class="materialize-textarea"></textarea>
+                                      <label for="desc">Description</label>
+                                  </div>
+                            </div>
+                            <div class="row">
+                                  <div class="input-field col s12">
+                                      <input type="text" id="dueDate" name="dueDate" class="datepicker">
+                                      <label for="dueDate">Due date</label>
+                                  </div>
+                            </div>
+                </div>
+                <div class="modal-footer">
+                      <button type="submit" class="btn waves-effect waves-green teal darken-1">Add</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    {{#tasks}}
+        <div class="col s3">
+            <div class="card {{status}}">
+                <div class="card-content">
+                    <div class="row">
+                    <h3>{{title}}</h3>
+                        <div class="col s9">
+                        <blockquote>{{desc}}</blockquote>
+                        <br>
+                        <p class="due" >Due for: {{dueDate}}</p>
+                        <p>Created on: {{creationDate}}</p>
+                        </div>
+                        <div class="col s3">
+                        <form method="POST" action="/tasks/delete/{{id}}/">
+                            <button type="submit" class="inline btn-floating pink darken-1 waves-effect"><i class="material-icons">delete</i></button>
+                        </form>
+                        <form method="POST" action="/tasks/complete/{{id}}/">
+                            <button type="submit" class="inline btn-floating teal darken-1 waves-effect"><i class="material-icons">check</i></button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/tasks}}
+</div>
+<!--JavaScript at end of body for optimized loading-->
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems);
+  });
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.datepicker');
+    var options = {format: 'yyyy-mm-dd'};
+    var instances = M.Datepicker.init(elems, options);
+  });
+</script>
