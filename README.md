@@ -16,6 +16,7 @@ I decided to document my development of this small app and my first experiences 
 * [Date 1.0](devdiary/d1.md)
 * [Date 2.0](devdiary/d2.md)
 * [Date 3.0](devdiary/d3.md)
+* [Date 4.0](devdiary/d4.md)
 
 
 
