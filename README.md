@@ -4,6 +4,9 @@ Learning project in the Kotlin language.
 
 This is my first contact with Kotlin (and Java) and my first time attempting any kind of public development diary.
 
+![Interface](devdiary/img/styled.png)
+![Modal](devdiary/img/modal.png)
+
 ## Goals
 * Gain initial insight into the Kotlin language and workflow
 * Avoid using frameworks that obfuscates how Kotlin works (the goals is to LEARN Kotlin not make the code small or super efficient)
