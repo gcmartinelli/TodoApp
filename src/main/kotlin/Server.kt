@@ -18,7 +18,7 @@ fun main() {
     app.routes {
         /* where the magic happens */
         ApiBuilder.get("/tasks") { ctx ->
-            val tasks = taskDAO.tasks.filter{ !it.value.deleted }.values // Let's ignore deleted tasks ofc
+            val tasks = taskDAO.tasks.filter{ !it.value.deleted }.values.sortedBy { it.dueDate } // Let's ignore deleted tasks ofc
             /* The block below transforms the date fields from unix time to strings.
                 There probably is a more concise way of doing this. And I could be doing this in
                 a dedicated 'views' file instead of mixing this logic with the API logic. But given the
@@ -38,7 +38,6 @@ fun main() {
                     )
                 )
             }
-            tasksToRender.sortBy(RenderTaskClass::dueDate)
            ctx.render("tasks.mustache",  mapOf("tasks" to tasksToRender))
         }
 
@@ -75,7 +74,7 @@ fun main() {
     }
 
     // This runs asynchronously every 'period' (in milliseconds).
-    Timer("checkTaskStatus").schedule(delay=0, period=1000) {
+    Timer("checkTaskStatus").schedule(delay=0, period=60000) {
         taskDAO.checkStatuses()
     }
 }
