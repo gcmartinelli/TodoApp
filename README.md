@@ -13,6 +13,23 @@ This is my first contact with Kotlin (and Java) and my first time attempting any
 * Get a sense for the differences in philosophy compared to Python
 * Have a working To-Do app with a browser interface
 
+## Final project structure
+```
+src/main/kotlin
+|
+|_ Server.kt    (main script, view/API)
+|_ TaskClass.kt (A data class representing a task in the ToDo app)
+|_ TaskDAO.kt   (Data Access Object glueing Tasks to the API)
+|_ main.kt      (throw away script used for iterative testing)
+```
+
+## Tools used
+* [Intellij](https://www.jetbrains.com/idea/) IDEA (IDE)
+* [Javalin](http://javalin.io) (lightweight web framework)
+* [Gradle](https://gradle.org/) (build tool)
+* [Mustache](http://mustache.github.io) (templating engine)
+* [Materialize](https://materializecss.com) (CSS/JS templates)
+
 ## Captain's Log
 I decided to document my development of this small app and my first experiences with Kotlin as a Python developer.
 
