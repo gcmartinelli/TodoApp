@@ -66,7 +66,7 @@ fun main() {
 
         ApiBuilder.post("/tasks/complete/:taskID") { ctx ->
             val taskID = ctx.pathParam("taskID").toInt()
-            taskDAO.completeTask(taskID).also{ println("[UPDATED] Task with ID $taskID status set to complete.")}
+            taskDAO.changeStatus(taskID, "complete").also{ println("[UPDATED] Task with ID $taskID status set to complete.")}
             ctx.status(200)
             ctx.redirect("/tasks")
         }

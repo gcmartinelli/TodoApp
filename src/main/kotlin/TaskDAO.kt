@@ -52,11 +52,16 @@ class TaskDAO(){
         tasks.replace(taskID, task)
     }
 
-    fun completeTask(taskID: Int) {
-        /* Given a task ID, flags a task as completed */
+    fun  changeStatus(taskID : Int, status : String) {
+        /* Given a task ID and a status string, changes the task's status.
+        *   Status must be one of: "todo", "complete", "late" */
         val task = tasks[taskID] ?: throw IllegalArgumentException("[ERROR] completeTask: Task with ID {$taskID} not found.")
-        task.status = "complete"
+        when(status){
+            "todo" -> task.status = "todo"
+            "complete" -> task.status = "complete"
+            "late" -> task.status = "late"
+            else -> throw java.lang.IllegalArgumentException("[ERROR] changeStatus: Illegal status argument $status. Only one of 'todo|complete|late' accepted.")
+            }
         tasks.replace(taskID, task)
     }
-
 }
