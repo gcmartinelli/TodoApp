@@ -17,10 +17,9 @@ This is my first contact with Kotlin (and Java) and my first time attempting any
 ```
 src/main/kotlin
 |
-|_ Server.kt    (main script, view/API)
+|_ main.kt    (main script, view/API)
 |_ TaskClass.kt (A data class representing a task in the ToDo app)
 |_ TaskDAO.kt   (Data Access Object glueing Tasks to the API)
-|_ main.kt      (throw away script used for iterative testing)
 ```
 
 ## Tools used
