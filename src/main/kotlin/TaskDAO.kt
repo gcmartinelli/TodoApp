@@ -5,7 +5,8 @@
     Methods:
     * addTask -> receives a dueDate:Date, title:String and desc:String. Saves task to DB
     * delTask -> given a taskID flags the task as deleted
-    * completeTask -> given a taskID flags the task as complete
+    * changeStatus -> given a taskID and a status string, change the task's status
+    * checkStatuses -> checks statuses of all non-late tasks and changes their status if they are overdue
     
  */
 import java.util.Date
@@ -63,5 +64,18 @@ class TaskDAO(){
             else -> throw java.lang.IllegalArgumentException("[ERROR] changeStatus: Illegal status argument $status. Only one of 'todo|complete|late' accepted.")
             }
         tasks.replace(taskID, task)
+    }
+
+    fun checkStatuses() {
+        /* Checks status of all tasks that are "todo",
+           if they are late, changes their status. */
+        println("[JOB] Checking statuses...")
+        val currUnixTime = Date().time
+        for (task in tasks.values.filter { it.status == "todo" }) {
+            if (task.dueDate < currUnixTime){
+                changeStatus(task.id, "late")
+                println("[JOB] Task ${task.id} is late. Changing status.")
+            }
+        }
     }
 }

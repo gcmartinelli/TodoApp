@@ -3,6 +3,8 @@
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder
 import java.util.Date
+import java.util.Timer
+import kotlin.concurrent.schedule
 
 fun main() {
     val taskDAO = TaskDAO()
@@ -72,5 +74,8 @@ fun main() {
         }
     }
 
+    // This runs asynchronously every 'period' (in milliseconds).
+    Timer("checkTaskStatus").schedule(delay=0, period=1000) {
+        taskDAO.checkStatuses()
+    }
 }
-
